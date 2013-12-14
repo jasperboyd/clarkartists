@@ -25,7 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
   # your network.
-  config.vm.network :forwarded_port, host: 4567, guest: 80
+  config.vm.network :forwarded_port, host: 1234, guest: 80
 
   config.vm.synced_folder ".", "/vagrant", :mount_options => ["dmode=777","fmode=666"]
 
