@@ -40,7 +40,9 @@ class User extends Magniloquent implements UserInterface, RemindableInterface {
 	);
 
 	protected static $relationships = array(
-
+		'soundcloud' => ['hasMany', 'SoundcloudAccount']; 
+		'vimeo' => ['hasMany', 'VimeoAccount']; 
+		'fivehundredpixel' => ['hasMany', 'FiveHundredPixelAccount'];  
     );
 
 	/**
