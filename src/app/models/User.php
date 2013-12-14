@@ -3,21 +3,62 @@
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+use \Magniloquent\Magniloquent\Magniloquent;
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
+class User extends Magniloquent implements UserInterface, RemindableInterface {
+
 	protected $table = 'users';
+	protected $hidden = array('password');
+	protected $guarded = array('id');
+	protected $fillable = array('username', 'email', 'first_name', 'last_name', 'password'); 
+
+	//TODO Validation Factory & Testing
+
+	//Validation (with Magniloquent)
 
 	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
+	 * Validation rules
 	 */
-	protected $hidden = array('password');
+	public $autoPurgeRedundantAttributes = true;
+
+	public static $rules = array(
+    
+    	"save" => array(
+    		'username' => 'required|min:4',
+    		'email' => 'required|email',
+    		'password' => 'required|min:8'
+  		),
+  	
+  		"create" => array(
+    		'username' => 'unique:users',
+    		'email' => 'unique:users'
+  		),
+  	
+  		"update" => array(
+  		)
+	
+	);
+
+	protected static $relationships = array(
+
+    );
+
+	/**
+    * Factory
+    */
+  	public static $factory = array(
+   		   'username' => 'string',
+  		   'email' => 'email',
+ 		   'password' => 'string',
+	  );
+
+  	/**
+    * Feed
+    */
+  	public function feed()
+    {
+    	return $this->songs; 
+    }
 
 	/**
 	 * Get the unique identifier for the user.
