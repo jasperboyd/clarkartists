@@ -1,5 +1,7 @@
 <?php
 
+use Musitect\Storage\User\UserRepository as User;
+
 class UserController extends BaseController {
 
 	/**
@@ -29,7 +31,18 @@ class UserController extends BaseController {
 	 */
 	public function store()
 	{
-		//
+		$s = $this->user->create(Input::all());
+
+    	if($s->isSaved())
+    	{
+      	return Redirect::route('users.index')
+        	->with('flash', 'The new user has been created');
+   		 }
+
+    	return Redirect::route('users.create')
+    	  ->withInput()
+    	  ->withErrors($s->errors());
+ 		 }
 	}
 
 	/**

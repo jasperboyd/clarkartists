@@ -1,79 +1,40 @@
 <?php
-
+ 
+use clarartists/storage/user/UserRepository as User;
+ 
 class RegistrationController extends BaseController {
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-        return View::make('registrations.index');
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-        return View::make('registrations.create');
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-        return View::make('registrations.show');
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-        return View::make('registrations.edit');
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
+ 
+  /**
+   * User Repository
+   */
+  protected $user;
+ 
+  /**
+   * Inject the User Repository
+   */
+  public function __construct(User $user)
+  {
+    $this->user = $user;
+  }
+ 
+  public function index()
+  {
+    return View::make('registration.index');
+  }
+ 
+  public function store()
+  {
+    $s = $this->user->create(Input::all());
+ 
+    if($s->isSaved())
+    {
+      return Redirect::route('users.edit', $s->id)
+        ->with('flash', 'The new user has been created');
+    }
+ 
+    return Redirect::route('register.index')
+      ->withInput()
+      ->withErrors($s->errors());
+  }
+ 
 }
