@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration {
 			$table->boolean('has_soundcloud');
 			$table->boolean('has_vimeo');
 			$table->boolean('has_500px');
-			$table->string('soundcloud');
 			$table->timestamps();
 		});
 	}
