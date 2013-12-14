@@ -8,9 +8,9 @@ use \Magniloquent\Magniloquent\Magniloquent;
 class User extends Magniloquent implements UserInterface, RemindableInterface {
 
 	protected $table = 'users';
-	protected $hidden = array('password');
+	protected $hidden = array('password', 'has_soundcloud', 'has_vimeo', 'has_500px');
 	protected $guarded = array('id');
-	protected $fillable = array('username', 'email', 'first_name', 'last_name', 'password'); 
+	protected $fillable = array('first_name', 'last_name', 'email'); 
 
 	//TODO Validation Factory & Testing
 
