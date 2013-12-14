@@ -11,10 +11,16 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', array(
+	'uses' => 'HomeConroller@index',
+	'as' => 'home.index'
+));
+
+Route::get('feed', array(
+	'before' => 'auth', 
+	'uses' => 'HomeController@feed', 
+	'as' => 'home.feed'
+)); 
 
 Route::resource('registration', 'RegistrationController'); 
 Route::resource('user', 'UserController'); 
