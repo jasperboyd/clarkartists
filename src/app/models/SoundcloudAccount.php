@@ -1,6 +1,8 @@
 <?php
 
-class SoundcloudAccount extends Eloquent {
+use \Magniloquent\Magniloquent\Magniloquent;
+
+class SoundcloudAccount extends Magniloquent {
 	protected $guarded = array();
 
 	public static $rules = array();
