@@ -4,14 +4,12 @@
 
 	<h1>Welcome Clark Artists</h1>
 
-	<section> 
-	<h2>Login</h2> 
-	@include('registration.partials.regform')
+	<section class="registration"> 
+	@include('registration.create')
 	</section> 
 
-	<section> 
-	<h2>Register</h2> 
-	@include('registration.partials.loginform')
+	<section class="login">  
+	@include('session.create')
 	</section> 
 
 @stop

@@ -1,6 +1,6 @@
 <?php
  
-use clarartists/storage/user/UserRepository as User;
+use clarartists\storage\user\UserRepository as User;
  
 class RegistrationController extends BaseController {
  
@@ -19,7 +19,7 @@ class RegistrationController extends BaseController {
  
   public function index()
   {
-    return View::make('registration.index');
+    return View::make('registration.create');
   }
  
   public function store()
