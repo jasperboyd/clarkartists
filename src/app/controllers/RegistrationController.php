@@ -1,6 +1,6 @@
 <?php
  
-use clarartists\storage\user\UserRepository as User;
+use clarkartists\storage\user\UserRepository as User;
  
 class RegistrationController extends BaseController {
  
@@ -32,7 +32,7 @@ class RegistrationController extends BaseController {
         ->with('flash', 'The new user has been created');
     }
  
-    return Redirect::route('register.index')
+    return Redirect::route('registration.index')
       ->withInput()
       ->withErrors($s->errors());
   }

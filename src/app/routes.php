@@ -24,4 +24,4 @@ Route::get('feed', array(
 
 Route::resource('session', 'SessionController'); 
 Route::resource('registration', 'RegistrationController'); 
-Route::resource('user', 'UserController'); 
+Route::resource('users', 'UserController'); 

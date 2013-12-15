@@ -10,7 +10,7 @@ class User extends Magniloquent implements UserInterface, RemindableInterface {
 	protected $table = 'users';
 	protected $hidden = array('password', 'has_soundcloud', 'has_vimeo', 'has_500px');
 	protected $guarded = array('id');
-	protected $fillable = array('first_name', 'last_name', 'email'); 
+	protected $fillable = array('first_name', 'last_name', 'email', 'password'); 
 
 	//TODO Validation Factory & Testing
 
@@ -24,13 +24,11 @@ class User extends Magniloquent implements UserInterface, RemindableInterface {
 	public static $rules = array(
     
     	"save" => array(
-    		'username' => 'required|min:4',
     		'email' => 'required|email',
     		'password' => 'required|min:8'
   		),
   	
   		"create" => array(
-    		'username' => 'unique:users',
     		'email' => 'unique:users'
   		),
   	
@@ -40,9 +38,9 @@ class User extends Magniloquent implements UserInterface, RemindableInterface {
 	);
 
 	protected static $relationships = array(
-		'soundcloud' => ['hasMany', 'SoundcloudAccount']; 
-		'vimeo' => ['hasMany', 'VimeoAccount']; 
-		'fivehundredpixel' => ['hasMany', 'FiveHundredPixelAccount'];  
+		'soundcloud' => ['hasMany', 'SoundcloudAccount'],
+		'vimeo' => ['hasMany', 'VimeoAccount'],
+		'fivehundredpixel' => ['hasMany', 'FiveHundredPixelAccount'] 
     );
 
 	/**
