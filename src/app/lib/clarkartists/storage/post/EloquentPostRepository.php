@@ -1,12 +1,13 @@
 <?php namespace clarkartists\storage\post;
 
 use Post;
+use DB;
 
 class EloquentPostRepository implements PostRepository {
 
   public function all()
   {
-    return Post::all();
+    return Post::PostsDesc();
   }
 
   public function find($id)

@@ -42,4 +42,9 @@ class Post extends Magniloquent {
     */
   	public static $factory = array();
 
+  	public function scopePostsDesc($query)
+    {
+        return $query->where('title', '!=', '')->orderBy('created_at', 'desc')->get();
+    }
+
 }

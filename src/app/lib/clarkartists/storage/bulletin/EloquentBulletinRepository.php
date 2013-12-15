@@ -6,7 +6,7 @@ class EloquentBulletinRepository implements BulletinRepository {
 
   public function all()
   {
-    return Bulletin::all();
+    return Bulletin::BulletinsDesc();
   }
 
   public function find($id)

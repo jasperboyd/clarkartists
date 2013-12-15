@@ -26,9 +26,7 @@ class HomeController extends BaseController {
 	{
 		if(Auth::check()){
 
-			$posts = $this->post->all()->sortBy(function($post){
-				return $post->created_at; 
-			});
+			$posts = $this->post->all();
 
 			return View::make('home.feed', compact('posts')); 
 		}

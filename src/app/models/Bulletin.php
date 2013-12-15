@@ -42,4 +42,9 @@ class Bulletin extends Magniloquent {
     */
   	public static $factory = array();
 
+  	public function scopeBulletinsDesc($query)
+    {
+        return $query->where('title', '!=', '')->orderBy('created_at', 'desc')->get();
+    }
+
 }
