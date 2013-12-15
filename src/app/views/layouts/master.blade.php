@@ -12,6 +12,7 @@
 		{{link_to_route('home.index', 'Feed')}}
 		{{link_to_route('users.index', 'Artists')}}
 		{{link_to_route('posts.create', 'Create Post')}}
+		{{link_to_route('bulletins.index', 'Bulletin Board')}}
 		{{link_to_route('users.edit', 'Settings', Auth::user()->id)}}
 		{{link_to_action('SessionController@destroy', 'Logout')}}
 	</nav> 

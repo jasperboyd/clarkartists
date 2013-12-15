@@ -16,7 +16,13 @@ class EloquentUserRepository implements UserRepository {
 
   public function create($input)
   {
-    return User::create($input);
+    $user = new User(\Input::all()); 
+
+    $user->full_name = $user->first_name . ' ' . $user->last_name; 
+
+    $user->save(); 
+
+    return $user;
   }
 
   public function update($id)

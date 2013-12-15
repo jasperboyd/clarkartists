@@ -88,7 +88,17 @@ class PostsController extends BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$s = $this->user->update($id);
+
+    	if($s->isSaved())
+   		{
+      		return Redirect::route('posts.show', $id)
+        	->with('flash', 'The user was updated');
+   		}
+
+    return Redirect::route('posts.edit', $id)
+      ->withInput()
+      ->withErrors($s->errors());
 	}
 
 	/**
@@ -99,7 +109,9 @@ class PostsController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$posts = $this->post->delete($id);
+
+		return View::make('posts.index', compact('posts')); 
 	}
 
 }

@@ -2,8 +2,6 @@
 
 use clarkartists\storage\comments\CommentsRepository as Comment;
 
-use Post;
-
 class CommentsController extends BaseController {
 
 
@@ -12,7 +10,7 @@ class CommentsController extends BaseController {
  		$this->beforeFilter('auth', array('except' => 'getLogin'));
      	$this->comment = $comment;
     }
-    
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -72,9 +70,11 @@ class CommentsController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($postid, $commentid)
 	{
-        return View::make('comments.edit');
+        $comment = $this->comment->find($commentid); 
+        $post = Post::find($postid);
+        return View::make('comments.edit', compact('comment', 'post'));
 	}
 
 	/**
@@ -83,9 +83,19 @@ class CommentsController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($postid, $commentid)
 	{
-		//
+		$s = $this->comment->update($commentid);
+
+    	if($s->isSaved())
+   		{
+      		return Redirect::route('home.index')
+        	->with('flash', 'The user was updated');
+   		}
+
+    return Redirect::route('comments.edit', compact('postid', 'commentid'))
+      ->withInput()
+      ->withErrors($s->errors());
 	}
 
 	/**

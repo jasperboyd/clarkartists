@@ -47,6 +47,7 @@ Route::get('logout', array(
 ));
 
 Route::resource('users', 'UserController'); 
+
 Route::resource('posts', 'PostsController'); 
 
 
@@ -56,4 +57,18 @@ Route::post('{post}/comments', array(
 	'as' => 'comments.store'
 ));
 
-Route::resource('comments', 'CommentsController', array('except' => ['store']));
+Route::get('{post}/comments/{comment}/edit', array(
+	'before' => 'auth',
+	'uses' => 'CommentsController@edit', 
+	'as' => 'comments.edit'
+));
+
+Route::any('{post}/comments/{comment}', array(
+	'before' => 'auth', 
+	'uses' => 'CommentsController@update',
+	'as' => 'comments.update'
+)); 
+
+Route::resource('comments', 'CommentsController', array('except' => ['store', 'edit', 'update']));
+
+Route::resource('bulletins', 'BulletinController'); 

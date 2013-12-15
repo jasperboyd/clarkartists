@@ -1,6 +1,6 @@
 <?php
 
-use clarkartists\storage\user\UserRepository as User;
+use clarkartists\storage\post\PostRepository as Post;
 
 class HomeController extends BaseController {
 
@@ -17,18 +17,20 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function __construct(User $user)
+	public function __construct(Post $post)
 	{
-     	$this->user = $user;
+     	$this->post = $post;
 	}
 
 	public function index()
 	{
 		if(Auth::check()){
 
-			$users = $this->user->all(); 
+			$posts = $this->post->all()->sortBy(function($post){
+				return $post->created_at; 
+			});
 
-			return View::make('home.feed', compact('users')); 
+			return View::make('home.feed', compact('posts')); 
 		}
 
 		return View::make('home.landing');

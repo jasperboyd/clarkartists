@@ -1,0 +1,45 @@
+<?php
+
+use \Magniloquent\Magniloquent\Magniloquent;
+
+class Bulletin extends Magniloquent {
+
+	protected $table = 'bulletins';
+	protected $guarded = array('id');
+	protected $fillable = array('title', 'text', 'user_id'); 
+
+	//TODO Validation Factory & Testing
+
+	//Validation (with Magniloquent)
+
+	/**
+	 * Validation rules
+	 */
+	public $autoPurgeRedundantAttributes = true;
+
+	public static $rules = array(
+    
+    	"save" => array(
+    		'title' => 'required',
+    		'text' => 'required'
+  		),
+  	
+  		"create" => array(
+  		),
+  	
+  		"update" => array(
+  		)
+	
+	);
+
+	protected static $relationships = array(
+		'user' => ['belongsTo', 'User'],
+		'comments' => ['hasMany', 'Comment'] 
+    );
+
+	/**
+    * Factory
+    */
+  	public static $factory = array();
+
+}

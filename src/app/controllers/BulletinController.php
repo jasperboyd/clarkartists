@@ -1,25 +1,25 @@
 <?php
 
-use clarkartists\storage\user\UserRepository as User;
+use clarkartists\storage\bulletin\BulletinRepository as Bulletin;
 
-class UserController extends BaseController {
+class BulletinController extends BaseController {
 
-
-	public function __construct(User $user)
+	
+	public function __construct(Bulletin $bulletin)
 	{
  		$this->beforeFilter('auth', array('except' => 'getLogin'));
-     	$this->user = $user;
-	}
+     	$this->bulletin = $bulletin;
+    }
+
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
-	 **/
-
+	 */
 	public function index()
 	{
-		$users = $this->user->all();
-        return View::make('users.index', compact('users'));
+		$bulletins = $this->bulletin->all(); 
+        return View::make('bulletin.index', compact('bulletins'));
 	}
 
 	/**
@@ -29,7 +29,7 @@ class UserController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('users.create');
+        return View::make('bulletin.create');
 	}
 
 	/**
@@ -39,19 +39,18 @@ class UserController extends BaseController {
 	 */
 	public function store()
 	{
-		$s = $this->user->create(Input::all());
+		$s = $this->bulletin->create(Input::all());
 
     	if($s->isSaved())
     	{
-      	return Redirect::route('users.index')
+      	return Redirect::route('bulletins.index')
         	->with('flash', 'The new user has been created');
    		 }
 
-    	return Redirect::route('users.create')
+    	return Redirect::route('bulletins.create')
     	  ->withInput()
     	  ->withErrors($s->errors());
- 	}
-	
+	}
 
 	/**
 	 * Display the specified resource.
@@ -61,11 +60,7 @@ class UserController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$user = $this->user->find($id); 
-		$posts = $user->posts;
-		$bulletins =  $user->bulletins;
-
-        return View::make('users.show', compact('user', 'posts', 'bulletins'));
+        return View::make('bulletin.show');
 	}
 
 	/**
@@ -76,7 +71,9 @@ class UserController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        return View::make('users.edit');
+		$bulletin = $this->bulletin->find($id); 
+        
+        return View::make('bulletin.edit', compact('bulletin'));
 	}
 
 	/**
@@ -87,17 +84,9 @@ class UserController extends BaseController {
 	 */
 	public function update($id)
 	{
-		$s = $this->user->update($id);
-
-    	if($s->isSaved())
-   		{
-      		return Redirect::route('users.show', $id)
-        	->with('flash', 'The user was updated');
-   		}
-
-    return Redirect::route('users.edit', $id)
-      ->withInput()
-      ->withErrors($s->errors());
+		$bulletins = $this->bulletin->update($id);
+		
+		return View::make('bulletin.index', compact('bulletins'));
 	}
 
 	/**
@@ -108,7 +97,10 @@ class UserController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		
+		$bulletins = $this->bulletin->delete($id); 
+
+		return View::make('bulletin.index', compact('bulletins'));
 	}
 
 }
