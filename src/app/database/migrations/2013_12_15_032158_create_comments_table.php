@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class Create500pxAccountTable extends Migration {
+class CreateCommentsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,11 @@ class Create500pxAccountTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('500px_account', function(Blueprint $table) {
+		Schema::create('comments', function(Blueprint $table) {
 			$table->increments('id');
+			$table->integer('post_id'); 
 			$table->integer('user_id'); 
-			//information here
+			$table->string('comment'); 
 			$table->timestamps();
 		});
 	}
@@ -28,7 +29,7 @@ class Create500pxAccountTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('500px_account');
+		Schema::drop('comments');
 	}
 
 }

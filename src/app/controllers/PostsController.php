@@ -1,7 +1,15 @@
 <?php
 
-class SoundcloudAccountController extends BaseController {
+use clarkartists\storage\post\PostRepository as Post;
 
+class PostsController extends BaseController {
+
+
+	public function __construct(Post $post)
+	{
+ 		$this->beforeFilter('auth', array('except' => 'getLogin'));
+     	$this->post = $post;
+    }
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,7 +17,7 @@ class SoundcloudAccountController extends BaseController {
 	 */
 	public function index()
 	{
-        return View::make('soundcloudaccounts.index');
+        return View::make('posts.index');
 	}
 
 	/**
@@ -19,7 +27,7 @@ class SoundcloudAccountController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('soundcloudaccounts.create');
+        return View::make('posts.create');
 	}
 
 	/**
@@ -29,7 +37,24 @@ class SoundcloudAccountController extends BaseController {
 	 */
 	public function store()
 	{
-		//
+		$s = $this->post->create(Input::all());
+
+    	if($s->isSaved())
+    	{
+      	return Redirect::route('home.index')
+        	->with('flash', 'The new user has been created');
+   		 }
+
+    	return Redirect::route('posts.create')
+    	  ->withInput()
+    	  ->withErrors($s->errors());
+ 		 
+	}
+
+	public function vote($id){ 
+
+		$post = $this->post->vote($id);
+		return View::make('posts.show', compact('post'));
 	}
 
 	/**
@@ -40,7 +65,7 @@ class SoundcloudAccountController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('soundcloudaccounts.show');
+        return View::make('posts.show');
 	}
 
 	/**
@@ -51,7 +76,8 @@ class SoundcloudAccountController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        return View::make('soundcloudaccounts.edit');
+		$post = $this->post->find($id); 
+        return View::make('posts.edit', compact('post'));
 	}
 
 	/**

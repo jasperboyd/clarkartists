@@ -19,9 +19,6 @@ class CreateUsersTable extends Migration {
 			$table->string('email');
 			$table->string('password'); 
 			$table->string('major'); 
-			$table->boolean('has_soundcloud');
-			$table->boolean('has_vimeo');
-			$table->boolean('has_500px');
 			$table->timestamps();
 		});
 	}

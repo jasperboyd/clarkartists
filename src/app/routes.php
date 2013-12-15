@@ -16,12 +16,44 @@ Route::get('/', array(
 	'as' => 'home.index'
 ));
 
-Route::get('feed', array(
-	'before' => 'auth', 
-	'uses' => 'HomeController@feed', 
-	'as' => 'home.feed'
-)); 
+/*
+Register
+*/
 
-Route::resource('session', 'SessionController'); 
-Route::resource('registration', 'RegistrationController'); 
+Route::get('register', array(
+  'uses' => 'RegistrationController@index',
+  'as' => 'registration.index'
+));
+Route::post('register', array(
+  'uses' => 'RegistrationController@store',
+  'as' => 'registration.store'
+));
+
+/*
+Session
+*/
+
+Route::get('login', array(
+  'uses' => 'SessionController@create',
+  'as' => 'session.create'
+));
+Route::post('login', array(
+  'uses' => 'SessionController@store',
+  'as' => 'session.store'
+));
+Route::get('logout', array(
+  'uses' => 'SessionController@destroy',
+  'as' => 'session.destroy'
+));
+
 Route::resource('users', 'UserController'); 
+Route::resource('posts', 'PostsController'); 
+
+
+Route::post('{post}/comments', array(
+	'before' => 'auth', 
+	'uses' => 'CommentsController@store',
+	'as' => 'comments.store'
+));
+
+Route::resource('comments', 'CommentsController', array('except' => ['store']));

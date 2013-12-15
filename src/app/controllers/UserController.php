@@ -1,17 +1,25 @@
 <?php
 
-use Musitect\Storage\User\UserRepository as User;
+use clarkartists\storage\user\UserRepository as User;
 
 class UserController extends BaseController {
 
+
+	public function __construct(User $user)
+	{
+ 		$this->beforeFilter('auth', array('except' => 'getLogin'));
+     	$this->user = $user;
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
-	 */
+	 **/
+
 	public function index()
 	{
-        return View::make('users.index');
+		$users = $this->user->all();
+        return View::make('users.index', compact('users'));
 	}
 
 	/**
@@ -42,8 +50,8 @@ class UserController extends BaseController {
     	return Redirect::route('users.create')
     	  ->withInput()
     	  ->withErrors($s->errors());
- 		 }
-	}
+ 	}
+	
 
 	/**
 	 * Display the specified resource.
@@ -53,7 +61,10 @@ class UserController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('users.show');
+		$user = $this->user->find($id); 
+		$posts = $user->posts; 
+
+        return View::make('users.show', compact('user', 'posts'));
 	}
 
 	/**
@@ -75,7 +86,17 @@ class UserController extends BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$s = $this->user->update($id);
+
+    	if($s->isSaved())
+   		{
+      		return Redirect::route('users.show', $id)
+        	->with('flash', 'The user was updated');
+   		}
+
+    return Redirect::route('users.edit', $id)
+      ->withInput()
+      ->withErrors($s->errors());
 	}
 
 	/**

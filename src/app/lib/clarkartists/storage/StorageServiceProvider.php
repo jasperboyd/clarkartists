@@ -11,6 +11,17 @@ class StorageServiceProvider extends ServiceProvider {
       'clarkartists\storage\user\EloquentUserRepository'
     );
 
+    $this->app->bind(
+      'clarkartists\storage\post\PostRepository',
+      'clarkartists\storage\post\EloquentPostRepository'
+    ); 
+ 
+
+$this->app->bind(
+	'clarkartists\storage\comments\CommentsRepository', 
+	'clarkartists\storage\comments\EloquentCommentsRepository'
+); 
+
   }
 
 }

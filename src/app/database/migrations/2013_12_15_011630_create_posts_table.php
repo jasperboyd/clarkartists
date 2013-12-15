@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateVimeoAccountTable extends Migration {
+class CreatePostsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,13 @@ class CreateVimeoAccountTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('vimeo_account', function(Blueprint $table) {
+		Schema::create('posts', function(Blueprint $table) {
 			$table->increments('id');
+			$table->integer('up_votes'); 
+			$table->string('title');
+			$table->longText('text');
+			$table->string('post_attachment')->nullable();
 			$table->integer('user_id'); 
-			//information here
 			$table->timestamps();
 		});
 	}
@@ -28,7 +31,7 @@ class CreateVimeoAccountTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('vimeo_account');
+		Schema::drop('posts');
 	}
 
 }

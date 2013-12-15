@@ -1,7 +1,18 @@
 <?php
 
-class VimeoAccountController extends BaseController {
+use clarkartists\storage\comments\CommentsRepository as Comment;
 
+use Post;
+
+class CommentsController extends BaseController {
+
+
+	public function __construct(Comment $comment)
+	{
+ 		$this->beforeFilter('auth', array('except' => 'getLogin'));
+     	$this->comment = $comment;
+    }
+    
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,7 +20,7 @@ class VimeoAccountController extends BaseController {
 	 */
 	public function index()
 	{
-        return View::make('vimeoaccounts.index');
+        return View::make('comments.index');
 	}
 
 	/**
@@ -19,7 +30,7 @@ class VimeoAccountController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('vimeoaccounts.create');
+        return View::make('comments.create');
 	}
 
 	/**
@@ -27,9 +38,21 @@ class VimeoAccountController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store($postid)
 	{
-		//
+		$post = Post::find($postid);
+
+		$s = $this->comment->create(Input::all(), $post);
+
+    	if($s->isSaved())
+    	{
+      	return Redirect::route('home.index')
+        	->with('flash', 'The new user has been created');
+   		 }
+
+    	return Redirect::route('posts.create')
+    	  ->withInput()
+    	  ->withErrors($s->errors());
 	}
 
 	/**
@@ -40,7 +63,7 @@ class VimeoAccountController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('vimeoaccounts.show');
+        return View::make('comments.show');
 	}
 
 	/**
@@ -51,7 +74,7 @@ class VimeoAccountController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        return View::make('vimeoaccounts.edit');
+        return View::make('comments.edit');
 	}
 
 	/**

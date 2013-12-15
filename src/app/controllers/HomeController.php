@@ -1,5 +1,7 @@
 <?php
 
+use clarkartists\storage\user\UserRepository as User;
+
 class HomeController extends BaseController {
 
 	/*
@@ -15,14 +17,20 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function index()
+	public function __construct(User $user)
 	{
-		return View::make('home.landing');
+     	$this->user = $user;
 	}
 
-	public function feed()
+	public function index()
 	{
-		return View::make('home.feed'); 
-	} 
+		if(Auth::check()){
 
+			$users = $this->user->all(); 
+
+			return View::make('home.feed', compact('users')); 
+		}
+
+		return View::make('home.landing');
+	}
 }

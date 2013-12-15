@@ -23,11 +23,6 @@ class EloquentUserRepository implements UserRepository {
   {
     $user = $this->find($id);
 
-    //init accounts to false
-    $user->has_soundcloud = false; 
-    $user->has_vimeo = false; 
-    $user->has_500px = false; 
-
     $user->save(\Input::all());
 
     return $user;
