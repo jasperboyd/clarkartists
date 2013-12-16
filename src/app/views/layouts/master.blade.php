@@ -22,7 +22,7 @@
 	@yield('content')
 
 	<footer> 
-		<h6>Clark Artists 2013 | Designed and Developed by Fenn Macon and <a href="jboyd.co">Jasper Boyd</a></h6> 
+		<h6>Clark Artists 2013 | <a href="jboyd.co">Jasper Boyd</a>, Fenn Macon, and Charlie Hildreth</h6> 
 	</footer> 
 </body>
 </html>
