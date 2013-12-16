@@ -4,7 +4,7 @@
 
 <p>Bulletins are for finding collaborators for your latest projects!</p>
 
-{{Form::open(['route' => 'bulletins.store'])}}
+{{Form::open(array('route' => 'bulletins.store'))}}
 @include('bulletin.partials.form')
 {{Form::close()}}
 

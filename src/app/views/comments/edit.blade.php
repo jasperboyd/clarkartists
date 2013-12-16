@@ -10,7 +10,7 @@
 <p>{{ $post->text }}<p>
 
 
-{{Form::model($comment,['route'=>['comments.update', $post->id, $comment->id],'method'=>'PUT'])}}
+{{Form::model($comment,array('route'=>array('comments.update', $post->id, $comment->id),'method'=>'PUT'))}}
 
 @include('comments.partials.form')
 

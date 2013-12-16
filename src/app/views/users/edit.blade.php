@@ -6,7 +6,7 @@
 
 	<h1>Edit Your Account</h1> 
 
-	{{Form::model(Auth::user(), ['route' => ['users.update', Auth::user()->id], 'method' => 'PUT'])}}
+	{{Form::model(Auth::user(), array('route' => array('users.update', Auth::user()->id), 'method' => 'PUT'))}}
 		<p>{{ Form::label('email', 'Email:') }} 
 		{{ Form::text('email') }}</p> 
 		<p>{{ Form::label('first_name', 'First Name:') }} 

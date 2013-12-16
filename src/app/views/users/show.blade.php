@@ -34,7 +34,7 @@
 					</section>
 	@endforeach
 
-				{{ Form::open(['route' => ['comments.store', $post->id]])}}
+				{{ Form::open(array('route' => array('comments.store', $post->id)))}}
 					@include('comments.create')
 				{{ Form::close() }}
 

@@ -1,4 +1,4 @@
-{{ Form::open(['route' => 'registration.store']) }} 
+{{ Form::open(array('route' => 'registration.store')) }} 
 
 	<p>{{ Form::label('email', 'Email:') }} 
 	{{ Form::text('email') }}</p> 

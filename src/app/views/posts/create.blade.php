@@ -8,7 +8,7 @@
 
 	<p>Share what you've been up to with the community!</p>
 
-	{{ Form::open(['route' => 'posts.store']) }}
+	{{ Form::open(array('route' => 'posts.store')) }}
 
 	@include('posts.partials.form')
 

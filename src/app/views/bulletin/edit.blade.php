@@ -6,7 +6,7 @@
 
 <h1>Edit your bulletin</h1>
 
-{{Form::model($bulletin, ['route' => ['bulletins.update', $bulletin->id], 'method'=>'PUT'])}}
+{{Form::model($bulletin, array('route' => array('bulletins.update', $bulletin->id), 'method'=>'PUT'))}}
 
 @include('bulletin.partials.form')
 

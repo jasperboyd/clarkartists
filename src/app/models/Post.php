@@ -33,8 +33,8 @@ class Post extends Magniloquent {
 	);
 
 	protected static $relationships = array(
-		'user' => ['belongsTo', 'User'],
-		'comments' => ['hasMany', 'Comment'] 
+		'user' => array('belongsTo', 'User'),
+		'comments' => array('hasMany', 'Comment')
     );
 
 	/**

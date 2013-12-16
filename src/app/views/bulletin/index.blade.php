@@ -36,7 +36,7 @@
 					</section>
 				@endforeach
 
-				{{ Form::open(['route' => ['comments.store.bulletincomment', $bulletin->id]])}}
+				{{ Form::open(array('route' => array('comments.store.bulletincomment', $bulletin->id)))}}
 					@include('comments.create')
 				{{ Form::close() }}
 

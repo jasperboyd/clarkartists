@@ -9,8 +9,7 @@ class StorageServiceProvider extends ServiceProvider {
 */
 
 
-  public function register()
-  {
+  public function register(){
     $this->app->bind(
         'clarkartists\storage\user\UserRepository',
         'clarkartists\storage\user\EloquentUserRepository'
@@ -20,7 +19,6 @@ class StorageServiceProvider extends ServiceProvider {
         'clarkartists\storage\post\PostRepository',
         'clarkartists\storage\post\EloquentPostRepository'
     ); 
- 
 
 	$this->app->bind(
 		'clarkartists\storage\comments\CommentsRepository', 
