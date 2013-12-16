@@ -27,6 +27,21 @@ class EloquentCommentsRepository implements CommentsRepository {
     return $comment;
   }
 
+  public function createBulletinComment($input, $bulletin){ 
+    
+    $comment = new Comment($input);
+    
+    //$bulletin = Bulletin::find($bulletinid); 
+    
+    $user = \Auth::user(); 
+
+    $comment->save();
+    $user->comments()->save($comment); 
+    $bulletin->comments()->save($comment);
+    
+    return $comment;
+  }
+
   public function update($id)
   {
     $comment = $this->find($id);

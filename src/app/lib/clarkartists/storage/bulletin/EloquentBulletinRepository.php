@@ -25,7 +25,7 @@ class EloquentBulletinRepository implements BulletinRepository {
 
     return $bulletin;
   }
-
+  
   public function update($id)
   {
     $bulletin = $this->find($id);

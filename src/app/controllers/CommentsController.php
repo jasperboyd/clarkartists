@@ -53,6 +53,22 @@ class CommentsController extends BaseController {
     	  ->withErrors($s->errors());
 	}
 
+	public function createBulletinComment($bulletinid)
+	{
+		$bulletin = Bulletin::find($bulletinid);
+		$s = $this->comment->createBulletinComment(Input::all(), $bulletin);
+
+    	if($s->isSaved())
+    	{
+      	return Redirect::route('bulletins.index')
+        	->with('flash', 'The new user has been created');
+   		 }
+
+    	return Redirect::route('bulletins.index')
+    	  ->withInput()
+    	  ->withErrors($s->errors());
+	}
+
 	/**
 	 * Display the specified resource.
 	 *

@@ -69,6 +69,12 @@ Route::any('{post}/comments/{comment}', array(
 	'as' => 'comments.update'
 )); 
 
+Route::post('bulletin/{bulletin}/comments', array(
+	'before' => 'auth', 
+	'uses' => 'CommentsController@createBulletinComment',
+	'as' => 'comments.store.bulletincomment'
+)); 
+
 Route::resource('comments', 'CommentsController', array('except' => ['store', 'edit', 'update']));
 
 Route::resource('bulletins', 'BulletinController'); 

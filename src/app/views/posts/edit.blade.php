@@ -1,6 +1,8 @@
 @extends ('layouts.master')
 
 @section('content') 
+
+	<article class="post_editor">
 	
 	<h1>Edit a Post</h1>
 
@@ -9,5 +11,7 @@
 	@include('posts.partials.form')
 
   	{{ Form::close() }}
+
+  </article>
 
 @stop

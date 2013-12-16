@@ -2,6 +2,8 @@
 
 @section('content')
 
+	<article class="account_editor"> 
+
 	<h1>Edit Your Account</h1> 
 
 	{{Form::model(Auth::user(), ['route' => ['users.update', Auth::user()->id], 'method' => 'PUT'])}}
@@ -18,5 +20,7 @@
 		</p>
 
 	{{Form::close()}}
+
+	</article> 
 
 @stop

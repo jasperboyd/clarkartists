@@ -8,6 +8,8 @@ interface CommentsRepository {
 
   public function create($input, $post);
 
+  public function createBulletinComment($input, $bulletin);
+
   public function update($input);
 
   public function delete($id);

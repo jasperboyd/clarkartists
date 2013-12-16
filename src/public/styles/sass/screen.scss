@@ -1,0 +1,198 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+@import "compass"; 
+
+$big : 24px; 
+$large : 18px;
+$normal : 12px; 
+$small : 9px; 
+
+$sans_serif : 'Futura';
+$serif : 'Garamond';
+
+$red : shade(red, 50); 
+$blue : tint(blue, 25);
+
+body { 
+	background-color: $red;
+}
+
+header { 
+	text-align: center;
+
+	margin: $small/2 0; 
+
+	h1 { 
+		font-size: $large; 
+	}
+
+	h2 { 
+		font-size: $small; 
+	}
+}
+
+nav { 
+	background-color: shade($red, 20);
+	padding: $large;
+	margin: $small 0;
+	text-align: center;
+
+	a { 
+		display: inline-block;
+		margin: 0 $small;
+		padding: $normal;
+		font-weight: 800;
+		@include border-radius($normal, $normal);
+	}
+}
+
+article { 
+	text-align: center;
+
+	h1 { font-size: $big; }
+}
+
+.registration, .login{ 
+	h1 { font-size: $large; }
+	margin: $big auto; 
+	p { margin: $small auto; }
+}
+
+.artists { 
+	li, a { 
+		list-style-type: none;
+		display: inline-block;
+		margin: $small;
+		padding: $small;
+		background-color: shade($red, 20);
+		@include border-radius($small, $small)
+	}
+}
+
+.feed, .bulletin_board { 
+	
+	.post, .bulletin { 
+		@include border-radius($large, $large);
+		margin: $large auto; 
+		background-color: shade($red, 50);
+		padding: $small; 
+		width: 50%;
+		h2 { 
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			margin: $normal;
+		}
+
+		h3 { 
+			font-size: $small;
+			padding: $normal;
+			margin: $normal 0;
+		}
+		p { 
+			margin: $large 0;
+		}
+	}
+}
+
+.profile { 
+
+	.posts, .bulletins { 
+		h2 {
+
+			font-size: $big;
+		}
+		background-color: shade($red, 75);
+		padding: $large;
+		width: 600px;
+		margin: $large auto;
+		@include border-radius($large, $large);
+	}
+
+	.post, .bulletin { 
+		@include border-radius($large, $large);
+		margin: $large auto; 
+		background-color: shade($red, 50);
+		padding: $small; 
+		width: 50%;
+		h3 { 
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			margin: $normal;
+		}
+
+		h4 { 
+			font-size: $small;
+			padding: $normal;
+			margin: $normal 0;
+		}
+		p { 
+			margin: $large 0;
+		}
+	}
+
+}
+
+.post_creator, .bulletin_creator, .account_editor, .post_editor, .bulletin_editor{ 
+	p { 
+		margin: $small auto;
+	}
+
+	input { 
+		width: 500px;
+		font-size: $big;
+	}
+}
+
+footer { 
+	text-align: center; 
+}
+
+h1, h2, h3, h4, h5, h6, p {color: white;}
+
+h1, h2, h3, h4, h5, h6 {font-family: $sans_serif; }
+
+p { 
+	font-family: $serif;
+}
+
+a { 
+	color: tint($red, 75);
+	background-color: shade($red, 75);
+	text-decoration: none;
+	padding: $small/2;
+	@include border-radius($small, $small);
+}
+
+a:hover, .selected { 
+	color: shade($red, 50);
+	background-color: tint($red, 75);
+}
+
+.highlight { 
+	background-color: white; 
+	color: $red;
+	display: inline-block; 
+	padding: $small/2;
+	@include border-radius($small/2, $small/2);
+}
+
+input { 
+	border: none;
+	background-color: shade($red, 10);
+	padding: $small;
+	color:white;
+	@include border-radius($small/2, $small/2);
+	margin: $small/2;
+}
+
+input:hover { 
+	background-color: shade($red, 20);
+}
+
+label { 
+	font-size: $small;
+}

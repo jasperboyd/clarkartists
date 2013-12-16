@@ -2,6 +2,7 @@
 
 @section('content')
 
+	<article class="landing"> 
 	<h1>Welcome Clark Artists</h1>
 
 	<section class="registration"> 
@@ -11,5 +12,6 @@
 	<section class="login">  
 	@include('session.create')
 	</section> 
+	<article> 
 
 @stop

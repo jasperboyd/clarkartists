@@ -1,13 +1,16 @@
 @extends('layouts.master')
 
 @section('content')
-
+	
+	<article class="feed">
 	<h1>Welcome {{Auth::user()->first_name}}</h1>
 	<p>Here you can view what othe Clark Artists have been up to.</p> 
+	
 		@foreach($posts as $post)
+			<section class="post">
 			
 			@if($post->post_attachment != NULL)
-				<a href="{{$post->post_attachment}}"><h2>{{$post->title}}</h2></a>
+				<h2><a href="{{$post->post_attachment}}">{{$post->title}}</a></h2>
 			@else
 				<h2>{{$post->title}}</h2>
 			@endif
@@ -23,22 +26,26 @@
 				{{link_to_action('PostsController@edit', 'edit', $post->id)}}
 				@endif
 
+				
 				@foreach( $post->comments as $comment)
+					<section class="comment">
 					<p>
-					{{ $comment->user->first_name }} 
-					{{ $comment->user->last_name }}: 
+					<span class="highlight">{{ $comment->user->full_name }}:</span> 
 					{{$comment->comment}} 
 					
 					@if($comment->user->id == Auth::user()->id)
-						{{ link_to_route('comments.edit', 'edit', [$post->id, $comment->id]) }} | {{ link_to_route('comments.destroy', 'delete', $comment->id) }}
+						<!--Comment menu-->
 					@endif
 					</p> 
+					</section>
 				@endforeach
 
 				{{ Form::open(['route' => ['comments.store', $post->id]])}}
 					@include('comments.create')
 				{{ Form::close() }}
 			</p>
+			</section>
 		@endforeach
-
+	
+	</article>
 @stop

@@ -2,11 +2,15 @@
 
 @section('content')
 
+<article class="bulletin_board">
+
 @include('bulletin.create')
 
 <h1>Bulletin Board</h1> 
 
 @foreach($bulletins as $bulletin)
+
+	<section class="bulletin"> 
 
 	<h2>{{$bulletin->title}}</h2>
 
@@ -19,7 +23,27 @@
 		@include('bulletin.destroy')	
 	@endif
 
+	@foreach( $bulletin->comments as $comment)
+					<section class="comment">
+					<p>
+					<span class="highlight">{{ $comment->user->full_name }}:</span> 
+					{{$comment->comment}} 
+					
+					@if($comment->user->id == Auth::user()->id)
+						<!--Comment menu-->
+					@endif
+					</p> 
+					</section>
+				@endforeach
+
+				{{ Form::open(['route' => ['comments.store.bulletincomment', $bulletin->id]])}}
+					@include('comments.create')
+				{{ Form::close() }}
+
+	</section>
 
 @endforeach
+
+</article>
 
 @stop

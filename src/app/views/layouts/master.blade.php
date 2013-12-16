@@ -1,13 +1,14 @@
 <html>
 <head>
 	<title>Clark Artists</title>
+	{{HTML::style('styles/css/screen.css');}}
 </head>
 <body>
+	@if(Auth::check())
 	<header> 
 		<h1>Clark Artists</h1> 
 		<h2>A Creative Cloud Space</h2>
 	</header> 
-	@if(Auth::check())
 	<nav> 
 		{{link_to_route('home.index', 'Feed')}}
 		{{link_to_route('users.index', 'Artists')}}
